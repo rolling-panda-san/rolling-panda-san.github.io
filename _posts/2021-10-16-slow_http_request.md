@@ -1,4 +1,7 @@
-# Slow http request from a docker container
+---
+title: Slow http request from a docker container
+tags: python docker
+---
 
 Recently I've been having a somewhat mysterious behaviour of docker containers
 where a http request from `requests.get` is significantly slower
