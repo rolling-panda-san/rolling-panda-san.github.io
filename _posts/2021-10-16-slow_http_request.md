@@ -1,5 +1,5 @@
 ---
-title: Slow http request from a docker container
+title: Slow http requests from a docker container
 tags: python docker
 ---
 
