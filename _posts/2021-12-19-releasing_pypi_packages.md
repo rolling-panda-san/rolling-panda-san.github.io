@@ -20,7 +20,7 @@ before publishing to pypi:
 - Write unit tests using `pytest`
 - Run code coverage using `coverage`
 - Write docstrings and build docs using `sphinx`
-- Publish the doc on [readthedocs](https://fipie.readthedocs.io/en/latest/)
+- Publish the doc on [readthedocs](https://fipie.readthedocs.io/en/latest/){:target="_blank"}
 - Organise `pyproject.toml`, `setup.py` and `setup.cfg` and
   remove `requirements.txt`
 - Build the package using `build`
@@ -111,7 +111,7 @@ It should produce an HTML page automatically under `fipie/htmlcov/index.html`.
 On pycharm, right-click the html file then navigate **Open in -> Browser ->
 Chrome** to open the file. It should show a page like below.
 
-![htmlcov](assets/images/20211219/htmlcov.png)
+![htmlcov](https://raw.githubusercontent.com/thoriuchi0531/thoriuchi0531.github.io/master/assets/images/20211219/htmlcov.png)
 
 You can click a link there to drill down which section is covered or not.
 
@@ -123,8 +123,8 @@ Furthermore, it can be used to produce the documentation automatically.
 
 I chose to use the `reStructuredText`(reST) style for the docstring. There are
 other styles
-like [numpy one](https://numpydoc.readthedocs.io/en/latest/format.html)
-or [google one](https://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html)
+like [numpy one](https://numpydoc.readthedocs.io/en/latest/format.html){:target="_blank"}
+or [google one](https://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html){:target="_blank"}
 .
 
 ```python
@@ -168,7 +168,7 @@ with `sphinx` which are slightly different from writing a plain markdown text.
 
 Once all docstrings are added (which is already tough), let's create some
 folders where the documentation files are created. Luckily `sphinx` already has
-a [script](https://www.sphinx-doc.org/en/master/usage/quickstart.html#setting-up-the-documentation-sources)
+a [script](https://www.sphinx-doc.org/en/master/usage/quickstart.html#setting-up-the-documentation-sources){:target="_blank"}
 called `sphinx-quickstart` to do most of the work. By running this, it should
 create the following important two folders:
 
@@ -221,7 +221,7 @@ add a new class in the future, I would need to make sure these markdowns are
 synchronised with the changes.
 
 For instance /fipie/docs/source/api/weighting.md currently looks like this:
-![sphinx-template](../assets/images/20211219/sphinx-template.png)
+![sphinx-template](https://raw.githubusercontent.com/thoriuchi0531/thoriuchi0531.github.io/master/assets/images/20211219/sphinx-template.png)
 
 ## Output the documentation
 
@@ -236,24 +236,24 @@ Then the HTML files should be produced in /fipie/docs/html/index.html
 
 As per the coverage HTML file, you can open it from pycharm and it should show a
 page something like below:
-![doc_index](../assets/images/20211219/doc_index.png)
+![doc_index](https://raw.githubusercontent.com/thoriuchi0531/thoriuchi0531.github.io/master/assets/images/20211219/doc_index.png)
 The theme of the documentation will be based on the `html_theme`
 parameter defined in `conf.py` above.
 
-# Publish the doc on [readthedocs](https://fipie.readthedocs.io/en/latest/)
+# Publish the doc on [readthedocs](https://fipie.readthedocs.io/en/latest/){:target="_blank"}
 
 At this stage the documentation is still hosted locally (on localhost).
 Obviously this needs to be hosted somewhere so other people can
-visit. [Read the Docs](https://readthedocs.org/) just fits the bill.
+visit. [Read the Docs](https://readthedocs.org/){:target="_blank"} just fits the bill.
 
 You can let readthedocs build the HTML documentation every time there is a push
 on the github repository. The resulting doc is also hosted on their website. In
 my case it
-is [https://fipie.readthedocs.io/en/latest/](https://fipie.readthedocs.io/en/latest/)
+is [https://fipie.readthedocs.io/en/latest/](https://fipie.readthedocs.io/en/latest/){:target="_blank"}
 
 The only thing readthedocs requires additionally is the configuration
 file `.readthedocs.yaml`.
-The [default parameters](https://docs.readthedocs.io/en/stable/config-file/v2.html)
+The [default parameters](https://docs.readthedocs.io/en/stable/config-file/v2.html){:target="_blank"}
 is pretty much all I needed except the path for `conf.py` and the last line. In
 the original yaml file, it uses `requirements.txt` to create an environment. As
 I show later I ditch the file in favour of `setup.cfg`. In this case,
@@ -298,7 +298,7 @@ it. On the "Builds" page, you can see each builds corresponding to each push on
 github. If you click one of the builds you can see what kind of commands are
 executed on their side. (basically creating an environment and then run sphinx)
 
-![readthedocs](../assets/images/20211219/readthedocs.png)
+![readthedocs](https://raw.githubusercontent.com/thoriuchi0531/thoriuchi0531.github.io/master/assets/images/20211219/readthedocs.png)
 
 # Organise `pyproject.toml`, `setup.py` and `setup.cfg` and remove `requirements.txt`
 
@@ -308,17 +308,17 @@ the test and coverage, it's probably a good time to think about packaging.
 To do that, I need a few extra configuration files like `setup.py` etc. My
 understanding is that traditionally to build a package, one has to
 create `setup.py` like the one
-mentioned [here](https://simonwillison.net/2021/Nov/4/publish-open-source-python-library/)
+mentioned [here](https://simonwillison.net/2021/Nov/4/publish-open-source-python-library/){:target="_blank"}
 and then call `python3 setup.py sdist`.
 
 However, as mentioned
-in [here](https://blog.ganssle.io/articles/2021/10/setup-py-deprecated.html),
+in [here](https://blog.ganssle.io/articles/2021/10/setup-py-deprecated.html){:target="_blank"},
 this method is now deprecated and we should instead use a package called `build`
 .
 
 Additionally, it appears that there is a preference to `pyproject.toml` which is
 basically a static configuration file like yaml over `setup.py` which is a
-python script. (cf [here](http://ivory.idyll.org/blog/2021-transition-to-pyproject.toml-example.html))
+python script. (cf [here](http://ivory.idyll.org/blog/2021-transition-to-pyproject.toml-example.html){:target="_blank"})
 Basically we prefer a static file (.cfg) rather than a dynamic one (.py).
 
 With enough googling I ended up with the current state below.
@@ -561,7 +561,7 @@ jobs:
 ## Publish
 
 Finally, the yaml below is to publish the package to pypi. Broadly, this is
-based on the link [here](https://packaging.python.org/en/latest/guides/publishing-package-distribution-releases-using-github-actions-ci-cd-workflows/) with some tweaks.
+based on the link [here](https://packaging.python.org/en/latest/guides/publishing-package-distribution-releases-using-github-actions-ci-cd-workflows/){:target="_blank"} with some tweaks.
 
 - This workflow is only kicked off when the unit test workflow is finished. This
   dependency across workflows seems to be relatively a new feature on github
@@ -636,26 +636,26 @@ jobs:
 
 That's it! I would have never imagined that the publication process was so hard
 and every package goes through this kind of process. The entire project can be
-found here [https://github.com/thoriuchi0531/fipie](https://github.com/thoriuchi0531/fipie)
+found here [https://github.com/thoriuchi0531/fipie](https://github.com/thoriuchi0531/fipie){:target="_blank"}
 
 # Reference
 
 ## sphinx
 
-- sphinx math support: [https://www.sphinx-doc.org/en/1.5.1/ext/math.html](https://www.sphinx-doc.org/en/1.5.1/ext/math.html)
+- sphinx math support: [https://www.sphinx-doc.org/en/1.5.1/ext/math.html](https://www.sphinx-doc.org/en/1.5.1/ext/math.html){:target="_blank"}
 
 ## Around building python packages
 
 - How to build, test and publish an open source Python
-  library: [https://simonwillison.net/2021/Nov/4/publish-open-source-python-library/](https://simonwillison.net/2021/Nov/4/publish-open-source-python-library/)
+  library: [https://simonwillison.net/2021/Nov/4/publish-open-source-python-library/](https://simonwillison.net/2021/Nov/4/publish-open-source-python-library/){:target="_blank"}
 - Why you shouldn't invoke setup.py
-  directly: [https://blog.ganssle.io/articles/2021/10/setup-py-deprecated.html](https://blog.ganssle.io/articles/2021/10/setup-py-deprecated.html)
+  directly: [https://blog.ganssle.io/articles/2021/10/setup-py-deprecated.html](https://blog.ganssle.io/articles/2021/10/setup-py-deprecated.html){:target="_blank"}
 - Transition your Python project to use pyproject.toml and setup.cfg! (An
-  example.): [http://ivory.idyll.org/blog/2021-transition-to-pyproject.toml-example.html](http://ivory.idyll.org/blog/2021-transition-to-pyproject.toml-example.html)
+  example.): [http://ivory.idyll.org/blog/2021-transition-to-pyproject.toml-example.html](http://ivory.idyll.org/blog/2021-transition-to-pyproject.toml-example.html){:target="_blank"}
 - pyproject.toml vs
-  setup.py: [https://stackoverflow.com/questions/62983756/what-is-pyproject-toml-file-for](https://stackoverflow.com/questions/62983756/what-is-pyproject-toml-file-for)
+  setup.py: [https://stackoverflow.com/questions/62983756/what-is-pyproject-toml-file-for](https://stackoverflow.com/questions/62983756/what-is-pyproject-toml-file-for){:target="_blank"}
 - Github action for publishing to
-  pypi: [https://packaging.python.org/en/latest/guides/publishing-package-distribution-releases-using-github-actions-ci-cd-workflows](https://packaging.python.org/en/latest/guides/publishing-package-distribution-releases-using-github-actions-ci-cd-workflows)
+  pypi: [https://packaging.python.org/en/latest/guides/publishing-package-distribution-releases-using-github-actions-ci-cd-workflows](https://packaging.python.org/en/latest/guides/publishing-package-distribution-releases-using-github-actions-ci-cd-workflows){:target="_blank"}
 - Github action dependencies across
-  workflows: [https://stackoverflow.com/questions/63343937/how-to-use-the-github-actions-workflow-run-event](https://stackoverflow.com/questions/63343937/how-to-use-the-github-actions-workflow-run-event)
-- Github action and setuptools_scm: [https://github.com/pypa/setuptools_scm/issues/414](https://github.com/pypa/setuptools_scm/issues/414)
+  workflows: [https://stackoverflow.com/questions/63343937/how-to-use-the-github-actions-workflow-run-event](https://stackoverflow.com/questions/63343937/how-to-use-the-github-actions-workflow-run-event){:target="_blank"}
+- Github action and setuptools_scm: [https://github.com/pypa/setuptools_scm/issues/414](https://github.com/pypa/setuptools_scm/issues/414){:target="_blank"}
