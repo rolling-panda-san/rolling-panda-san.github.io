@@ -4,10 +4,10 @@ tags: python pypi
 ---
 
 This month I just published my very first pypi package
-called [fipie](https://pypi.org/project/fipie/0.0.2/). The package currently
-does simple portfolio optimisation stuff with clustering and all that which by
-itself an interesting topic, but still simple enough. However, to reach that
-stage -- creating docs, running a code coverage, understanding the
+called [fipie](https://pypi.org/project/fipie/0.0.2/){:target="_blank"}. The
+package currently does simple portfolio optimisation stuff with clustering and
+all that which by itself an interesting topic, but still simple enough. However,
+to reach that stage -- creating docs, running a code coverage, understanding the
 building/publishing process and automating all of these -- was quite a long
 journey because I hadn't done any of these.
 
@@ -111,7 +111,7 @@ It should produce an HTML page automatically under `fipie/htmlcov/index.html`.
 On pycharm, right-click the html file then navigate **Open in -> Browser ->
 Chrome** to open the file. It should show a page like below.
 
-![htmlcov](../assets/images/20211219/htmlcov.png)
+![htmlcov](assets/images/20211219/htmlcov.png)
 
 You can click a link there to drill down which section is covered or not.
 
@@ -186,28 +186,16 @@ changed some of it to cater to my preference.
 - `sphinx.ext.autodoc` allows sphinx to read the docstrings and automatically
   generate documents.
 - `source_suffix = ['.md']` to tell sphinx that I'm using markdown
-```python
-# -- Path setup --------------------------------------------------------------
 
-# If extensions (or modules to document with autodoc) are in another directory,
-# add these directories to sys.path here. If the directory is relative to the
-# documentation root, use os.path.abspath to make it absolute, like shown here.
-#
+```python
 from pathlib import Path
 import sys
 sys.path.insert(0, Path(__file__).parent.parent.parent.as_posix())
-
-# -- Project information -----------------------------------------------------
 
 project = 'fipie'
 copyright = '2021'
 author = 'Tomoya Horiuchi'
 
-# -- General configuration ---------------------------------------------------
-
-# Add any Sphinx extension module names here, as strings. They can be
-# extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
-# ones.
 extensions = [
     'sphinx.ext.autodoc',
     'myst_parser',  # markdown support
@@ -216,25 +204,11 @@ extensions = [
 
 source_suffix = ['.md']
 master_doc = 'index'
-
-# Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
-
-# List of patterns, relative to source directory, that match files and
-# directories to ignore when looking for source files.
-# This pattern also affects html_static_path and html_extra_path.
 exclude_patterns = []
 
-# -- Options for HTML output -------------------------------------------------
-
-# The theme to use for HTML and HTML Help pages.  See the documentation for
-# a list of builtin themes.
-#
 html_theme = 'sphinx_book_theme'
 
-# Add any paths that contain custom static files (such as style sheets) here,
-# relative to this directory. They are copied after the builtin static files,
-# so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
 ```
 
@@ -269,16 +243,17 @@ parameter defined in `conf.py` above.
 # Publish the doc on [readthedocs](https://fipie.readthedocs.io/en/latest/)
 
 At this stage the documentation is still hosted locally (on localhost).
-Obviously this needs to be hosted somewhere so other people can visit. Read the
-Docs (https://readthedocs.org/) just fits the bill.
+Obviously this needs to be hosted somewhere so other people can
+visit. [Read the Docs](https://readthedocs.org/) just fits the bill.
 
 You can let readthedocs build the HTML documentation every time there is a push
 on the github repository. The resulting doc is also hosted on their website. In
-my case it is https://fipie.readthedocs.io/en/latest/
+my case it
+is [https://fipie.readthedocs.io/en/latest/](https://fipie.readthedocs.io/en/latest/)
 
 The only thing readthedocs requires additionally is the configuration
-file `.readthedocs.yaml`. The default parameters defined
-in https://docs.readthedocs.io/en/stable/config-file/v2.html
+file `.readthedocs.yaml`.
+The [default parameters](https://docs.readthedocs.io/en/stable/config-file/v2.html)
 is pretty much all I needed except the path for `conf.py` and the last line. In
 the original yaml file, it uses `requirements.txt` to create an environment. As
 I show later I ditch the file in favour of `setup.cfg`. In this case,
@@ -332,18 +307,18 @@ the test and coverage, it's probably a good time to think about packaging.
 
 To do that, I need a few extra configuration files like `setup.py` etc. My
 understanding is that traditionally to build a package, one has to
-create `setup.py` like the one mentioned
-here https://simonwillison.net/2021/Nov/4/publish-open-source-python-library/
+create `setup.py` like the one
+mentioned [here](https://simonwillison.net/2021/Nov/4/publish-open-source-python-library/)
 and then call `python3 setup.py sdist`.
 
 However, as mentioned
-in https://blog.ganssle.io/articles/2021/10/setup-py-deprecated.html , this
-method is now deprecated and we should instead use a package called `build`.
+in [here](https://blog.ganssle.io/articles/2021/10/setup-py-deprecated.html),
+this method is now deprecated and we should instead use a package called `build`
+.
 
 Additionally, it appears that there is a preference to `pyproject.toml` which is
 basically a static configuration file like yaml over `setup.py` which is a
-python script. (
-cf http://ivory.idyll.org/blog/2021-transition-to-pyproject.toml-example.html)
+python script. (cf [here](http://ivory.idyll.org/blog/2021-transition-to-pyproject.toml-example.html))
 Basically we prefer a static file (.cfg) rather than a dynamic one (.py).
 
 With enough googling I ended up with the current state below.
@@ -586,9 +561,7 @@ jobs:
 ## Publish
 
 Finally, the yaml below is to publish the package to pypi. Broadly, this is
-based on the link
-here https://packaging.python.org/en/latest/guides/publishing-package-distribution-releases-using-github-actions-ci-cd-workflows/
-with some tweaks.
+based on the link [here](https://packaging.python.org/en/latest/guides/publishing-package-distribution-releases-using-github-actions-ci-cd-workflows/) with some tweaks.
 
 - This workflow is only kicked off when the unit test workflow is finished. This
   dependency across workflows seems to be relatively a new feature on github
@@ -663,26 +636,26 @@ jobs:
 
 That's it! I would have never imagined that the publication process was so hard
 and every package goes through this kind of process. The entire project can be
-found here https://github.com/thoriuchi0531/fipie
+found here [https://github.com/thoriuchi0531/fipie](https://github.com/thoriuchi0531/fipie)
 
 # Reference
 
 ## sphinx
 
-- sphinx math support: https://www.sphinx-doc.org/en/1.5.1/ext/math.html
+- sphinx math support: [https://www.sphinx-doc.org/en/1.5.1/ext/math.html](https://www.sphinx-doc.org/en/1.5.1/ext/math.html)
 
 ## Around building python packages
 
 - How to build, test and publish an open source Python
-  library: https://simonwillison.net/2021/Nov/4/publish-open-source-python-library/
+  library: [https://simonwillison.net/2021/Nov/4/publish-open-source-python-library/](https://simonwillison.net/2021/Nov/4/publish-open-source-python-library/)
 - Why you shouldn't invoke setup.py
-  directly: https://blog.ganssle.io/articles/2021/10/setup-py-deprecated.html
+  directly: [https://blog.ganssle.io/articles/2021/10/setup-py-deprecated.html](https://blog.ganssle.io/articles/2021/10/setup-py-deprecated.html)
 - Transition your Python project to use pyproject.toml and setup.cfg! (An
-  example.): http://ivory.idyll.org/blog/2021-transition-to-pyproject.toml-example.html
+  example.): [http://ivory.idyll.org/blog/2021-transition-to-pyproject.toml-example.html](http://ivory.idyll.org/blog/2021-transition-to-pyproject.toml-example.html)
 - pyproject.toml vs
-  setup.py: https://stackoverflow.com/questions/62983756/what-is-pyproject-toml-file-for
+  setup.py: [https://stackoverflow.com/questions/62983756/what-is-pyproject-toml-file-for](https://stackoverflow.com/questions/62983756/what-is-pyproject-toml-file-for)
 - Github action for publishing to
-  pypi: https://packaging.python.org/en/latest/guides/publishing-package-distribution-releases-using-github-actions-ci-cd-workflows
+  pypi: [https://packaging.python.org/en/latest/guides/publishing-package-distribution-releases-using-github-actions-ci-cd-workflows](https://packaging.python.org/en/latest/guides/publishing-package-distribution-releases-using-github-actions-ci-cd-workflows)
 - Github action dependencies across
-  workflows: https://stackoverflow.com/questions/63343937/how-to-use-the-github-actions-workflow-run-event
-- Github action and setuptools_scm: https://github.com/pypa/setuptools_scm/issues/414
+  workflows: [https://stackoverflow.com/questions/63343937/how-to-use-the-github-actions-workflow-run-event](https://stackoverflow.com/questions/63343937/how-to-use-the-github-actions-workflow-run-event)
+- Github action and setuptools_scm: [https://github.com/pypa/setuptools_scm/issues/414](https://github.com/pypa/setuptools_scm/issues/414)
